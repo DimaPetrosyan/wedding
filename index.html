@@ -709,19 +709,7 @@
       }
     }
 
-    /* Single-day countdown block */
-    #deadline .countdown {
-      margin-top: 28px;
-    }
-
-    #deadline .countdown-item {
-      min-width: 180px;
-      padding: 28px 24px 22px;
-    }
-
-    #deadline .countdown-value {
-      font-size: clamp(58px, 11vw, 112px);
-    }
+    /* Countdown в секции #deadline использует общие стили .countdown */
 
   </style>
 </head>
@@ -865,8 +853,20 @@
 
         <div class="countdown" id="countdown" aria-label="Обратный отсчёт до свадьбы">
           <div class="countdown-item">
-            <div class="countdown-value" id="countdown-days">—</div>
-            <div class="countdown-label">дней</div>
+            <div class="countdown-value" id="cd-days">—</div>
+            <div class="countdown-label" id="cd-days-label">дней</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="cd-hours">—</div>
+            <div class="countdown-label" id="cd-hours-label">часов</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="cd-minutes">—</div>
+            <div class="countdown-label" id="cd-minutes-label">минут</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="cd-seconds">—</div>
+            <div class="countdown-label" id="cd-seconds-label">секунд</div>
           </div>
         </div>
 
@@ -1006,29 +1006,6 @@
       update();
       var timerId = setInterval(update, 1000);
     })();
-
-    const weddingDate = new Date("2026-06-26T19:00:00+03:00"); // время свадьбы по Москве
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = weddingDate.getTime() - now.getTime();
-      const daysLeft = Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-
-      const daysElement = document.getElementById("countdown-days");
-      const finishedElement = document.getElementById("countdown-finished");
-
-      if (daysElement) {
-        daysElement.textContent = daysLeft;
-      }
-
-      if (finishedElement && daysLeft === 0) {
-        finishedElement.style.display = "block";
-      }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 60 * 60 * 1000);
-
   </script>
 </body>
 </html>
